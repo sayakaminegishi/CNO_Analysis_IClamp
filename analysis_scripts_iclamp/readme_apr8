@@ -1,0 +1,3 @@
+Fixes from Apr 6 ver:
+- corrected AHP amplitude definition (thresh to trough)
+- properly extracts APs.  extracts properties of the first AP in the first sweep that contains at least 2 consecutive APs
