@@ -2,11 +2,15 @@
 %% CNO Experiment - Iclamp analysis
 
 % Description: This script creates one excel file for controls, washout,
-% and the treatment group, with each file containing the burst and singlet
-% AP properties of that section, in all files tested.
+% and the treatment group, with each file containing the burst and average singlet
+% AP properties of that section from all the files selected for analysis.
 
 %Figures 2, 4 and 6 show the results for sections control, treatment and
 %washout respectively.
+
+%sheet 1 = burst properties for the particular section (control, washout
+%etc)
+%sheet 2 = singlet AP properties for the particular section
 
 % Created by: Sayaka (Saya) Minegishi
 % Contact: minegishis@brandeis.edu
