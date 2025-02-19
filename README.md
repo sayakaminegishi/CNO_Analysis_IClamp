@@ -12,10 +12,7 @@ scripts for CNO experiments at Birren lab.
 
 ################
 ## Get AP counts for a cell:
-INSTRUCTIONS: save getAPCountForTrial3.m in the same directory as the file avgAPCounter3.m.
-Then click Run on avgAPCounter3.m. It will direct you to pick your abf files for the cell, where each file represents one run of the protocol (one set of
-sweeps) for that cell. It will save the AP counts in a table called
-APCounts.xlsx in the same directory as this script.
+INSTRUCTIONS: Download the zip file for this whole repository. Unzip on your computer and open avgAPCounter3.m. Click Run. It will direct you to pick your abf files for the cell, where each file represents one run of the protocol (one set of sweeps) for that cell. It will save the AP counts in a table called APCounts.xlsx in the same directory as this script. Make sure you're picking a set of files for only ONE CELL.
 
 
 For any questions or concerns, please feel free to contact me at minegishis@brandeis.edu
