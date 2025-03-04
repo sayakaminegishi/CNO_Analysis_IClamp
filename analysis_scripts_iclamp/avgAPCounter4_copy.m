@@ -5,7 +5,7 @@
 % - Rows = File names
 % and shows average AP count per sweep in the final row
 
-% RELIES ON: getAPCountForTrial5.m
+% RELIES ON: getAPCountForTrial5_copy.m. prev verified ver from github
 
 % INSTRUCTIONS: save getAPCountForTrial3.m in the same directory as this
 % file. Then click Run on this program. It will direct you to pick your
@@ -50,6 +50,7 @@ disp(['Now working on directory ' dirname]);
 
 tempDir = fullfile(dirname, 'tempdata', filesep); % Folder for selected data
 
+
 get_files_from_user(dirname); % Let user select files, move to tempdata
 
 % Get file names
@@ -66,7 +67,7 @@ for n = 1:numFiles
     disp([int2str(n) '. Processing: ' filename]);
 
     try
-        apCounts = getAPCountForTrial4(filename); % Get AP counts for this file
+        apCounts = getAPCountForTrial5_copy(filename); % Get AP counts for this file
         sweepCount = numel(apCounts); % Number of sweeps in this file
         maxSweeps = max(maxSweeps, sweepCount); % Update max sweep count
         

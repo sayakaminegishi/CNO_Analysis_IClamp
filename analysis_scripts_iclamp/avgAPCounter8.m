@@ -16,7 +16,7 @@
 
 % Created by Sayaka (Saya) Minegishi, with some advice from ChatGPT.
 % minegishis@brandeis.edu
-% 2/26/2025
+% 3/4/2025
 
 clear all;
 close all;
@@ -24,7 +24,7 @@ close all;
 %%%%%%%%%%% USER INPUT!!!!!!! %%%%%%%%%%%%%%%%%%%%
 %please enter the name of the excel file that you want to store the results
 %in.
-outputfile = "APCounts2.xlsx"; % Summary file name
+outputfile = "APCounts_mar4.xlsx"; % Summary file name
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp("Start of program")
@@ -66,7 +66,7 @@ for n = 1:numFiles
     disp([int2str(n) '. Processing: ' filename]);
 
     try
-        apCounts = getAPCountForTrial4(filename); % Get AP counts for this file
+        apCounts = getAPCountForTrial8(filename); % Get AP counts for this file
         sweepCount = numel(apCounts); % Number of sweeps in this file
         maxSweeps = max(maxSweeps, sweepCount); % Update max sweep count
         
@@ -88,8 +88,19 @@ for i = 1:size(allResults, 1)
     end
 end
 % Compute the average AP count for each sweep (excluding the filename column)
-sweepData = cell2mat(allResults(:, 2:end)); % Convert AP counts to a numeric array
-avgPerSweep = mean(sweepData, 1, 'omitnan'); % Compute mean while ignoring NaNs
+numericData = allResults(:, 2:end); % Extract only numeric part
+validRows = cellfun(@(x) isnumeric(x) || ismissing(x), numericData); % Check valid numeric data
+
+% Convert to matrix while preserving NaNs
+sweepData = NaN(size(numericData)); % Preallocate with NaNs
+for i = 1:size(numericData, 1)
+    numericRow = numericData(i, :);
+    numericRow = [numericRow{:}]; % Convert cell row to numeric array
+    sweepData(i, 1:numel(numericRow)) = numericRow; % Store values
+end
+
+% Compute mean per sweep, ignoring NaNs
+avgPerSweep = mean(sweepData, 1, 'omitnan');
 
 % Append final row with averages
 allResults{end+1, 1} = 'Average'; % Label row as "Average"
