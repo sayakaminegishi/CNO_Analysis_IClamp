@@ -5,10 +5,10 @@
 % - Rows = File names
 % and shows average AP count per sweep in the final row
 
-% RELIES ON: getAPCountForTrial5.m
+% RELIES ON: getAPCountForTrial8.m
 
-% INSTRUCTIONS: save getAPCountForTrial3.m in the same directory as this
-% file. Then click Run on this program. It will direct you to pick your
+% INSTRUCTIONS: save getAPCountForTrial8.m in the same directory as this
+% file. Specify excel file name for output. Then click Run on this program. It will direct you to pick your
 % abf files for the cell, where each file represents one run of the protocol (one set of
 % sweeps) for that cell. It will save the AP counts in a table called
 % APCounts.xlsx in the same directory as this script.
@@ -24,7 +24,7 @@ close all;
 %%%%%%%%%%% USER INPUT!!!!!!! %%%%%%%%%%%%%%%%%%%%
 %please enter the name of the excel file that you want to store the results
 %in.
-outputfile = "SHRND+G_singles26.xlsx"; % Summary file name
+outputfile = "WKY32.xlsx"; % Summary file name
 
 %%%%%%%%%%%%%%% DO NOT MODIFY BELOW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp("Start of program")

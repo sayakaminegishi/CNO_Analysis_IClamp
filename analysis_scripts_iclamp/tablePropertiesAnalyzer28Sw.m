@@ -1,6 +1,7 @@
 %ap count and freq analyzer
 %takes in an EXCEL FILE with values to analyze
-
+%compares freq between SHR and WKY neurons (overall)
+%28 swe4eps
 
 filename = '/Users/sayakaminegishi/Documents/Birren Lab/2025/results/cellAvgApCount.xlsx';
 
