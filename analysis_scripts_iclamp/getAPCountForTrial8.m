@@ -5,6 +5,9 @@ function [apCounts] = getAPCountForTrial8(filename1)
     numSweeps = size(dataallsweeps, 3); % Total number of sweeps
     apCounts = zeros(1, numSweeps); % Initialize AP count storage
     
+    if numSweeps>28
+        return; %invalid data (eg voltage clamp). skip.
+        end
     % Convert sampling interval to seconds
     si_actual = 1e-6 * si; 
 
@@ -58,17 +61,19 @@ function [apCounts] = getAPCountForTrial8(filename1)
         % Store the count of detected APs
         apCounts(sweep) = numel(spikeLocations);
 
-        %%%%%%%%% PLOT %%%%%%%%%%%%
+        %%%%%%%%% PLOT last sweep only %%%%%%%%%%%%
         time_ms = linspace(starttime_ms, endtime_ms, length(data));
-
-        figure;
-        plot(time_ms, data, 'b', 'LineWidth', 1.5); % Plot trace in blue
-        hold on;
-        plot(time_ms(spikeLocations), pks, 'ro', 'MarkerFaceColor', 'r'); % Red dots for detected APs
-        xlabel('Time (ms)');
-        ylabel('Membrane Potential (mV)');
-        title(['Sweep ' num2str(sweep) ': Membrane Potential']);
-        grid on;
-        hold off;
+        
+        if sweep==1 | sweep==numSweeps
+            figure;
+            plot(time_ms, data, 'b', 'LineWidth', 1.5); % Plot trace in blue
+            hold on;
+            plot(time_ms(spikeLocations), pks, 'ro', 'MarkerFaceColor', 'r'); % Red dots for detected APs
+            xlabel('Time (ms)');
+            ylabel('Membrane Potential (mV)');
+            title(['Sweep ' num2str(sweep) ': Membrane Potential']);
+            grid on;
+            hold off;
+        end
     end
 end

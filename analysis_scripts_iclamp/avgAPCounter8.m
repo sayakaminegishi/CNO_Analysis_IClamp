@@ -24,23 +24,11 @@ close all;
 %%%%%%%%%%% USER INPUT!!!!!!! %%%%%%%%%%%%%%%%%%%%
 %please enter the name of the excel file that you want to store the results
 %in.
-outputfile = "SHRND+G_5_3_01_24.xlsx"; % Summary file name
+outputfile = "SHRND+G_singles26.xlsx"; % Summary file name
 
 %%%%%%%%%%%%%%% DO NOT MODIFY BELOW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp("Start of program")
 
-% promptfile = "Please enter the name of the output Excel file, including the .xlsx extension, or say 'quit' to exit program: ";
-% outputfile = input(promptfile, "s"); % Get user input as a string
-% 
-% if promptfile == "quit"
-%     quit;
-% end
-% 
-% % Ensure the filename ends with .xlsx (if the user forgets to include it)
-% if ~endsWith(outputfile, ".xlsx")
-%     outputfile = outputfile + ".xlsx";
-% end
-% 
 
 addpath('analysis_scripts_iclamp/');
 mkdir tempdata; % Create temp folder for selected files
