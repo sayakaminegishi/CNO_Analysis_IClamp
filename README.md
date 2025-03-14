@@ -12,7 +12,7 @@ scripts for CNO experiments at Birren lab.
 
 ################
 ## Get AP counts for a cell:
-INSTRUCTIONS: Download the zip file for this whole repository. Unzip on your computer and open avgAPCounter3.m. Click Run. It will direct you to pick your abf files for the cell, where each file represents one run of the protocol (one set of sweeps) for that cell. It will save the AP counts in a table called APCounts.xlsx in the same directory as this script. Make sure you're picking a set of files for only ONE CELL.
+INSTRUCTIONS: Download the zip file for this whole repository. Unzip on your computer and open avgAPCounter8.m. SPECIFY FILE NAME OF THE OUTPUT EXCEL FILE (with .xlsx ending). Click Run. It will direct you to pick your abf files for the cell, where each file represents one run of the protocol (one set of sweeps) for that cell. Enter the start time of the pulse in ms and the duration of the pulse when prompted. It will save the AP counts for each sweep, plus the average, in a table with your excel name, in the same directory as this script. Make sure you're picking a set of files for only ONE CELL.
 
 
 For any questions or concerns, please feel free to contact me at minegishis@brandeis.edu
