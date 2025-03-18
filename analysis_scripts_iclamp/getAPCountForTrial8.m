@@ -52,11 +52,13 @@ function [apCounts] = getAPCountForTrial8(filename1)
         data = squeeze(dataallsweeps(starttime_idx:endtime_idx, 1, sweep));
         
         % Set AP detection parameters
-        allowedDeviation = 40; % Noise filter threshold
-        minAmp = data(1) + allowedDeviation;
+       allowedDeviation = 40; % Noise filter threshold
+        
+        firstpercentile = prctile(dataallsweeps(starttime_idx:endtime_idx),1); 
+        minAmp = firstpercentile + allowedDeviation;
 
         % Detect spikes
-        [pks, spikeLocations] = findpeaks(data, 'MinPeakHeight', minAmp, 'MinPeakProminence', 5);
+        [pks, spikeLocations] = findpeaks(data, 'MinPeakHeight', minAmp, 'MinPeakProminence', 45);
 
         % Store the count of detected APs
         apCounts(sweep) = numel(spikeLocations);
@@ -75,5 +77,6 @@ function [apCounts] = getAPCountForTrial8(filename1)
             grid on;
             hold off;
         end
+        %getPhasePlot(data, starttime_ms, endtime_ms, si_actual)
     end
 end
