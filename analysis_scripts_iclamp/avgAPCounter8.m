@@ -24,7 +24,7 @@ close all;
 %%%%%%%%%%% USER INPUT!!!!!!! %%%%%%%%%%%%%%%%%%%%
 %please enter the name of the excel file that you want to store the results
 %in.
-outputfile = "shrn5.xlsx"; % Summary file name
+outputfile = "shrn6.xlsx"; % Summary file name
 
 %%%%%%%%%%%%%%% DO NOT MODIFY BELOW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp("Start of program")
@@ -110,3 +110,4 @@ writetable(T, filenameExcelDoc, 'Sheet', 1);
 
 % Remove temp directory
 rmdir(tempDir, 's');
+

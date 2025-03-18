@@ -51,6 +51,7 @@ function [apCounts] = getAPCountForTrial8(filename1)
         % Extract relevant data
         data = squeeze(dataallsweeps(starttime_idx:endtime_idx, 1, sweep));
         
+
         % Set AP detection parameters
        allowedDeviation = 40; % Noise filter threshold
         
@@ -58,7 +59,9 @@ function [apCounts] = getAPCountForTrial8(filename1)
         minAmp = firstpercentile + allowedDeviation;
 
         % Detect spikes
-        [pks, spikeLocations] = findpeaks(data, 'MinPeakHeight', minAmp, 'MinPeakProminence', 45);
+        [pks, spikeLocations] = findpeaks(data, 'MinPeakHeight', minAmp, 'MinPeakProminence', 45, 'MinPeakDistance',50); %TODO: base it on intraspike interval like in spike_times2.m
+        %d(:,1,sweep),height); 
+        %[number, times] = spike_times2(dataallsweeps(:, 1, 28),minAmp)
 
         % Store the count of detected APs
         apCounts(sweep) = numel(spikeLocations);
