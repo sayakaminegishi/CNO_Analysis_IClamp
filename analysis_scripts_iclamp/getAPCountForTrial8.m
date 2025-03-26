@@ -53,7 +53,7 @@ function [apCounts] = getAPCountForTrial8(filename1)
         
 
         % Set AP detection parameters
-       allowedDeviation = 40; % Noise filter threshold
+       allowedDeviation = 25; % Noise filter threshold
         
         firstpercentile = prctile(dataallsweeps(starttime_idx:endtime_idx),1); 
         minAmp = firstpercentile + allowedDeviation;

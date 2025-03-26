@@ -5,10 +5,10 @@
 % - Rows = File names
 % and shows average AP count per sweep in the final row
 
-% RELIES ON: getAPCountForTrial9.m
+% RELIES ON: getAPCountForTrial5.m
 
-% INSTRUCTIONS: save getAPCountForTrial8.m in the same directory as this
-% file. Specify excel file name for output. Then click Run on this program. It will direct you to pick your
+% INSTRUCTIONS: save getAPCountForTrial3.m in the same directory as this
+% file. Then click Run on this program. It will direct you to pick your
 % abf files for the cell, where each file represents one run of the protocol (one set of
 % sweeps) for that cell. It will save the AP counts in a table called
 % APCounts.xlsx in the same directory as this script.
@@ -16,18 +16,31 @@
 
 % Created by Sayaka (Saya) Minegishi, with some advice from ChatGPT.
 % minegishis@brandeis.edu
-% 3/4/2025
+% 2/26/2025
 
 clear all;
 close all;
+
 %%%%%%%%%%% USER INPUT!!!!!!! %%%%%%%%%%%%%%%%%%%%
 %please enter the name of the excel file that you want to store the results
 %in.
-outputfile = "wky60.xlsx"; % Summary file name
+outputfile = "APCounts2.xlsx"; % Summary file name
 
-%%%%%%%%%%%%%%% DO NOT MODIFY BELOW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp("Start of program")
 
+% promptfile = "Please enter the name of the output Excel file, including the .xlsx extension, or say 'quit' to exit program: ";
+% outputfile = input(promptfile, "s"); % Get user input as a string
+% 
+% if promptfile == "quit"
+%     quit;
+% end
+% 
+% % Ensure the filename ends with .xlsx (if the user forgets to include it)
+% if ~endsWith(outputfile, ".xlsx")
+%     outputfile = outputfile + ".xlsx";
+% end
+% 
 
 addpath('analysis_scripts_iclamp/');
 mkdir tempdata; % Create temp folder for selected files
@@ -53,8 +66,7 @@ for n = 1:numFiles
     disp([int2str(n) '. Processing: ' filename]);
 
     try
-
-        apCounts = getAPCountForTrial8(filename); % Get AP counts for this file
+        apCounts = getAPCountForTrial5(filename); % Get AP counts for this file
         sweepCount = numel(apCounts); % Number of sweeps in this file
         maxSweeps = max(maxSweeps, sweepCount); % Update max sweep count
         
@@ -76,19 +88,8 @@ for i = 1:size(allResults, 1)
     end
 end
 % Compute the average AP count for each sweep (excluding the filename column)
-numericData = allResults(:, 2:end); % Extract only numeric part
-validRows = cellfun(@(x) isnumeric(x) || ismissing(x), numericData); % Check valid numeric data
-
-% Convert to matrix while preserving NaNs
-sweepData = NaN(size(numericData)); % Preallocate with NaNs
-for i = 1:size(numericData, 1)
-    numericRow = numericData(i, :);
-    numericRow = [numericRow{:}]; % Convert cell row to numeric array
-    sweepData(i, 1:numel(numericRow)) = numericRow; % Store values
-end
-
-% Compute mean per sweep, ignoring NaNs
-avgPerSweep = mean(sweepData, 1, 'omitnan');
+sweepData = cell2mat(allResults(:, 2:end)); % Convert AP counts to a numeric array
+avgPerSweep = mean(sweepData, 1, 'omitnan'); % Compute mean while ignoring NaNs
 
 % Append final row with averages
 allResults{end+1, 1} = 'Average'; % Label row as "Average"
@@ -110,4 +111,3 @@ writetable(T, filenameExcelDoc, 'Sheet', 1);
 
 % Remove temp directory
 rmdir(tempDir, 's');
-

@@ -6,7 +6,7 @@
 filename = '/Users/sayakaminegishi/Documents/Birren Lab/2025/results/cellCountAvg2.xlsx';
 
 %%%%%% table 1 - SHR 25sw Chronic CNO 10uM %%%%%%%%%%%%%%%%
-sheet_SHR25ChrCNO = '48h10umCNO-SHR_25sw';  % Change to the desired sheet name
+sheet_SHR25ChrCNO = '48h10umCNO-SHR_28sw';  % Change to the desired sheet name
 
 % Import the specific sheet as a table
 T = readtable(filename, 'Sheet', sheet_SHR25ChrCNO);
@@ -27,7 +27,7 @@ SHR25ChrCNO_table = table(sweepNumbers, averages, frequency, ...
 
 disp(SHR25ChrCNO_table)
 %%%%%% table 2 - WKY 25sw Chronic CNO 10uM %%%%%%%%%%%%%%%%
-sheet_48h10umCNOWKY = '48h10umCNO-WKY_25sw';  % Change to the desired sheet name
+sheet_48h10umCNOWKY = '48h10umCNO-WKY_28sw';  % Change to the desired sheet name
 
 % Import the specific sheet as a table
 T = readtable(filename, 'Sheet', sheet_48h10umCNOWKY);
@@ -58,16 +58,29 @@ figure;
 subplot(1,2,1); histogram(freq1); title('Frequency - SHR25ChrCNO');
 subplot(1,2,2); histogram(freq2); title('Frequency - WKY25ChrCNO');
 
-% Perform one-sided Mann-Whitney U test (ranksum test)
-%to test whether WKY freq is higher than SHR freq.
-[p, h] = ranksum(freq2, freq1, 'tail', 'right'); % Tests if freq2 > freq1
+[h, p, ci, stats] = ttest2(freq1, freq2, 'Tail', 'right'); % Tests if freq2 > freq1
+% Perform independent t-test
+[h, p, ci, stats] = ttest2(freq1, freq2, 'Tail', 'both'); % Two-tailed test
 
-% Display results
-if h == 1
-    fprintf('Significant difference in frequency values (p = %.4f)\n', p);
+% Display t-statistic and p-value
+fprintf('t-statistic = %.4f, p-value = %.4f\n', stats.tstat, p);
+
+if p<=0.05
+
+    % Determine direction of difference
+    if stats.tstat > 0
+        fprintf('freq2 (WKY) is significantly greater than freq1 (SHR).\n');
+    elseif stats.tstat < 0
+        fprintf('freq1 (SHR) is significantly greater than freq2 (WKY).\n');
+    
+    end
 else
-    fprintf('No significant difference in frequency values (p = %.4f)\n', p);
+    fprintf('No significant difference detected.\n');
 end
+
+% Display confidence interval
+fprintf('95%% Confidence Interval: [%.4f, %.4f]\n', ci(1), ci(2));
+%%%%%%%%%
 
 %effect size for the difference in AP freq:
 mean1 = mean(freq1);

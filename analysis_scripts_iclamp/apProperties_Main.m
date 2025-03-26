@@ -1,11 +1,11 @@
-% MAIN SCRIPT - GET AVG AP COUNT PER SWEEP FOR MULTIPLE FILES
+% MAIN SCRIPT - GET AVG PROPERTIES
 % DESCRIPTION: Reads multiple .abf files, calculates AP counts per sweep, 
 % and stores results in a table where:
 % - Columns = Sweep numbers
 % - Rows = File names
 % and shows average AP count per sweep in the final row
 
-% RELIES ON: getAPCountForTrial9.m
+% RELIES ON: getAPCountForTrial8.m
 
 % INSTRUCTIONS: save getAPCountForTrial8.m in the same directory as this
 % file. Specify excel file name for output. Then click Run on this program. It will direct you to pick your
@@ -20,10 +20,11 @@
 
 clear all;
 close all;
+
 %%%%%%%%%%% USER INPUT!!!!!!! %%%%%%%%%%%%%%%%%%%%
 %please enter the name of the excel file that you want to store the results
 %in.
-outputfile = "wky60.xlsx"; % Summary file name
+outputfile = "wky4.xlsx"; % Summary file name
 
 %%%%%%%%%%%%%%% DO NOT MODIFY BELOW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp("Start of program")
