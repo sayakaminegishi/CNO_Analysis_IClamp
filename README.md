@@ -1,3 +1,7 @@
+
+# CNO_Analysis_IClamp
+scripts for CNO experiments at Birren lab. 
+
 ################
 ## Get AP counts for a cell:
 INSTRUCTIONS: Download the zip file for this whole repository. Unzip on your computer and open avgAPCounter9.m. Click Run. It will direct you to pick your abf files for the cell, where each file represents one run of the protocol (one set of sweeps) for that cell. In the script avgAPCounter.m, please specify the name of the output excel file. Make sure you're picking a set of files for only ONE CELL.
@@ -7,9 +11,6 @@ freqAnalyzer2.m and freqAnalyzerTwoWayAnova.m performs a one- and two-way ANOVA 
 
 
 
-
-# CNO_Analysis_IClamp
-scripts for CNO experiments at Birren lab. 
 
 ## Instructions:
 1. Open'cnomain.m'.
