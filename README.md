@@ -11,7 +11,7 @@ freqAnalyzer2.m and freqAnalyzerTwoWayAnova.m performs a one- and two-way ANOVA 
 
 
 
-
+######### ignore below: under construction #########
 ## Instructions:
 1. Open'cnomain.m'.
 2. Define the sweep numbers for each section (control, treatment, washout) as a vector, as [start_sweep:end_sweep].
