@@ -10,36 +10,40 @@ function [apCounts] = getAPCountForTrial8(filename1)
         end
     % Convert sampling interval to seconds
     si_actual = 1e-6 * si; 
-
-    % Collect all user inputs at the beginning
-    while true
-        userInput = input("Input pulse start time in ms after start of recording (or type 'q' to quit): ", 's');
-        if strcmpi(userInput, 'q') || strcmpi(userInput, 'quit')
-            disp('Program terminated by user.');
-            return;
-        end
-        starttime_ms = str2double(userInput);
-        if isnan(starttime_ms) || starttime_ms < 0
-            disp('Invalid input. Please enter a positive numeric value.');
-            continue;
-        end
-        break;
-    end
-
-    while true
-        userInput = input("Enter the duration of the pulse in ms (or type 'q' to quit): ", 's');
-        if strcmpi(userInput, 'q') || strcmpi(userInput, 'quit')
-            disp('Program terminated by user.');
-            return;
-        end
-        duration_ms = str2double(userInput);
-        if isnan(duration_ms) || duration_ms <= 0
-            disp('Invalid input. Please enter a positive numeric value.');
-            continue;
-        end
-        break;
-    end
-
+    %%%%%% UNCOMMENT BELOW CODE TO GENERALIZE CODE %%%%%%%%%%%%%%%%%%%
+    % % Collect all user inputs at the beginning
+    % while true
+    %     userInput = input("Input pulse start time in ms after start of recording (or type 'q' to quit): ", 's');
+    %     if strcmpi(userInput, 'q') || strcmpi(userInput, 'quit')
+    %         disp('Program terminated by user.');
+    %         return;
+    %     end
+    %     starttime_ms = str2double(userInput);
+    %     if isnan(starttime_ms) || starttime_ms < 0
+    %         disp('Invalid input. Please enter a positive numeric value.');
+    %         continue;
+    %     end
+    %     break;
+    % end
+    % 
+    % while true
+    %     userInput = input("Enter the duration of the pulse in ms (or type 'q' to quit): ", 's');
+    %     if strcmpi(userInput, 'q') || strcmpi(userInput, 'quit')
+    %         disp('Program terminated by user.');
+    %         return;
+    %     end
+    %     duration_ms = str2double(userInput);
+    %     if isnan(duration_ms) || duration_ms <= 0
+    %         disp('Invalid input. Please enter a positive numeric value.');
+    %         continue;
+    %     end
+    %     break;
+    % end
+    %%%%%%%%%%%%%%%%%%
+    %IF NOT GENERALIZED:
+    starttime_ms = 138;
+    duration_ms = 500;
+    
     % Convert to indices
     starttime_idx = round(starttime_ms / (si * 1e-3)); % Convert ms to samples
     duration_idx = round(duration_ms / (si * 1e-3));

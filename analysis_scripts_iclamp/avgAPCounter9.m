@@ -23,7 +23,7 @@ close all;
 %%%%%%%%%%% USER INPUT!!!!!!! %%%%%%%%%%%%%%%%%%%%
 %please enter the name of the excel file that you want to store the results
 %in.
-outputfile = "shr67.xlsx"; % Summary file name
+outputfile = "wk6.xlsx"; % Summary file name
 
 %%%%%%%%%%%%%%% DO NOT MODIFY BELOW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp("Start of program")
@@ -54,7 +54,7 @@ for n = 1:numFiles
 
     try
 
-        apCounts = getAPCountForTrial8(filename); % Get AP counts for this file
+        apCounts = getAPCountForTrial9(filename); % Get AP counts for this file
         sweepCount = numel(apCounts); % Number of sweeps in this file
         maxSweeps = max(maxSweeps, sweepCount); % Update max sweep count
         
