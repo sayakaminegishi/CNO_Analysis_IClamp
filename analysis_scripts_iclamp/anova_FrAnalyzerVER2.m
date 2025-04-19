@@ -1,4 +1,4 @@
-%FR analyzer VERSION 2 - loading csv filse and conducting anova
+%FR analyzer VERSION 2 - loading csv filse and conducting singkle anovas
 %from /Users/sayakaminegishi/MATLAB/Projects/CNO_Analysis_IClamp2025/analysis_scripts_iclamp/firingRateAnalyzer.m
 
 % Load CSV files

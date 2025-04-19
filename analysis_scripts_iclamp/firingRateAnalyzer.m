@@ -3,10 +3,10 @@ addpath('/Users/sayakaminegishi/MATLAB/Projects/vhlab-toolbox-matlab')
 
 %%%%%%%%%% ENTER INFO BELOW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 filename = '/Users/sayakaminegishi/Documents/Birren Lab/2025/results/cellCountAvg2.xlsx'; %data table containing AP counts for each sweep.
-strainName = 'SHR'; 
-sheetName = '48h10umCNO-SHR_25sw';
+strainName = 'WKY'; 
+sheetName = 'WKYN_Only';
 %48h10umCNO-SHR_25sw, 48h10umCNO-WKY_25sw, WKYN_Only, SHRN_Only
-outputCsvName = 'shrnChrCNO2.csv'; %name of output csv file with the summary results contained
+outputCsvName = 'WKYNONLY4.csv'; %name of output csv file with the summary results contained
 cno = 1; %Enter 1 if CNO (treatment) is used, 0 otherwise. 
 
 %%%%%%%% MAKE SUMMARY TABLE FOR FREQUENCY VS CURRENT (DO NOT MODIFY) %%%%%%%%%%%%%%%%%%
@@ -27,6 +27,13 @@ strain=repmat({strainName}, numCells, 1);
 treatment = zeros(numCells,1)+cno; %1 for yes, chronic CNO treatment. 0 otherwise.
 maxFiringRate = nan(numCells, 1);
 
+% Create a single figure window
+figure;
+
+% Define layout for subplots
+numRows = ceil(sqrt(numCells));
+numCols = ceil(numCells / numRows);
+
 % Loop through each cell
 for cellNum = 1:numCells
     % Extract response data for the current cell
@@ -38,23 +45,24 @@ for cellNum = 1:numCells
     % Compute fitted curve
     C_fit = vlt.math.rectify(C);
 
+    % Create subplot
+    subplot(numRows, numCols, cellNum);
+    
     % Plot results
-    figure(gcf);
     plot(C, Y, 'o'); % Original data
     hold on;
     plot(C, Rm(cellNum) * vlt.fit.naka_rushton_func(C_fit(:), Rb(cellNum)), 'rx-'); % Fitted curve
     xlabel('Current (pA)');
     ylabel('Firing rate (Hz)');
-    title(['IR Plot for Cell: ', cellNames{cellNum}]); % Show cell name in title
+    title(['Cell: ', cellNames{cellNum}]); % Show cell name in title
     legend({'Data', 'Fit'}, 'Location', 'best');
     hold off;
-    
-    maxFiringRate(cellNum)=Rm(cellNum) * vlt.fit.naka_rushton_func(C_fit(end),Rb(cellNum));
+
+    maxFiringRate(cellNum) = Rm(cellNum) * vlt.fit.naka_rushton_func(C_fit(end), Rb(cellNum));
 
     % Display results for debugging
     disp(['Cell ', cellNames{cellNum}, ': Rm = ', num2str(Rm(cellNum)), ', Rb = ', num2str(Rb(cellNum))]);
 end
-
 
 % Define function to remove outliers using IQR
 removeOutliers = @(x) ~isoutlier(x, 'quartiles');
@@ -86,4 +94,3 @@ T = table(cellNames, strain, treatment, Rm, Rb, maxFiringRate, ...
 disp(T);
 writetable(T, outputCsvName); % Save to CSV file
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
