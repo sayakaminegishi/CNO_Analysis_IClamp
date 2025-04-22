@@ -4,12 +4,12 @@ function [apCounts] = getAPCountForTrial9(filename1)
     
     numSweeps = size(dataallsweeps, 3); % Total number of sweeps
     apCounts = zeros(1, numSweeps); % Initialize AP count storage
-    
+    C = linspace(-50e-12, 310e-12, 25);   % Current in Amps
     if numSweeps>28
         return; %invalid data (eg voltage clamp). skip.
         end
     % Convert sampling interval to seconds
-    si_actual = 1e-6 * si; 
+    si_actual = 1e-6 * si
 
     %%%%%% UNCOMMENT BELOW CODE TO GENERALIZE CODE %%%%%%%%%%%%%%%%%%%
     % % Collect all user inputs at the beginning
@@ -73,7 +73,7 @@ function [apCounts] = getAPCountForTrial9(filename1)
         %%%%%%%%% PLOT last sweep only %%%%%%%%%%%%
         time_ms = linspace(starttime_ms, endtime_ms, length(data));
         
-        if sweep==1 | sweep==numSweeps
+        if sweep==1 || sweep==numSweeps
             figure;
             plot(time_ms, data, 'b', 'LineWidth', 1.5); % Plot trace in blue
             hold on;
@@ -84,6 +84,33 @@ function [apCounts] = getAPCountForTrial9(filename1)
             grid on;
             hold off;
         end
-        %getPhasePlot(data, starttime_ms, endtime_ms, si_actual)
+                % Compute dV/dt
+        dvdt = diff(data) / si_actual; % mV per second
+        % v_trimmed = data(1:end-1);     % Align lengths with diff output
+        % 
+        % if sweep == 1 || sweep == numSweeps
+        %     % Plot phase plot
+        %     figure;
+        %     plot(v_trimmed, dvdt, 'k');
+        %     xlabel('Membrane Potential (mV)');
+        %     ylabel('dV/dt (mV/s)');
+        %     title(['Sweep ' num2str(sweep) ': Phase Plot']);
+        %     grid on;
+        
+        max_dvdt = max(abs(dvdt)); % Get max rate of rise/fall for the sweep
+        maxDvdtPerSweep(sweep) = max_dvdt; % Store per sweep
+
     end
+
+    % Trim current array to match actual number of sweeps
+    C_used = C(1:numSweeps);
+    
+    % Plot dV/dt vs Current
+    figure;
+    plot(C_used * 1e12, maxDvdtPerSweep, 'ko-'); % Convert A to pA
+    xlabel('Input Current (pA)');
+    ylabel('Max dV/dt (mV/s)');
+    title('Max dV/dt vs Input Current');
+    grid on;
+
 end

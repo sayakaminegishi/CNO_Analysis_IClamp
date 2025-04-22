@@ -5,10 +5,10 @@ addpath('/Users/sayakaminegishi/MATLAB/Projects/vhlab-toolbox-matlab')
 
 %%%%%%%%%% ENTER INFO BELOW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 filename = '/Users/sayakaminegishi/Documents/Birren Lab/2025/results/cellCountAvg2.xlsx'; 
-strainName = 'WKY'; 
-sheetName = 'WKYN_Only';
+strainName = 'SHR'; 
+sheetName = 'SHRN_Only';
 %48h10umCNO-SHR_25sw, 48h10umCNO-WKY_25sw, WKYN_Only, SHRN_Only
-outputCsvName = 'WKYN_Only_NEW.csv'; 
+outputCsvName = 'SHRN_Only_NEW.csv'; 
 cno = 1; % Enter 1 if CNO (treatment) is used, 0 otherwise
 
 %%%%%%%%%% LOAD AND SETUP %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
