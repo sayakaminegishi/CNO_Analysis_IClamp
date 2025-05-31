@@ -23,7 +23,7 @@ close all;
 %%%%%%%%%%% USER INPUT!!!!!!! %%%%%%%%%%%%%%%%%%%%
 %please enter the name of the excel file that you want to store the results
 %in.
-outputfile = "wk6.xlsx"; % Summary file name
+outputfile = "SHRN+DREADDS_10um48hCNO.xlsx"; % Summary file name
 
 %%%%%%%%%%%%%%% DO NOT MODIFY BELOW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp("Start of program")

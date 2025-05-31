@@ -1,5 +1,5 @@
 %FINAL VERSION OF firingRateAnalyzer!!!!!
-
+%fits a model to AP data to predict shape of rising phase
 %% Define file path and add necessary toolbox
 addpath('/Users/sayakaminegishi/MATLAB/Projects/vhlab-toolbox-matlab')
 

@@ -73,44 +73,37 @@ function [apCounts] = getAPCountForTrial9(filename1)
         %%%%%%%%% PLOT last sweep only %%%%%%%%%%%%
         time_ms = linspace(starttime_ms, endtime_ms, length(data));
         
-        if sweep==1 || sweep==numSweeps
-            figure;
-            plot(time_ms, data, 'b', 'LineWidth', 1.5); % Plot trace in blue
-            hold on;
-            plot(time_ms(spikeLocations), pks, 'ro', 'MarkerFaceColor', 'r'); % Red dots for detected APs
-            xlabel('Time (ms)');
-            ylabel('Membrane Potential (mV)');
-            title(['Sweep ' num2str(sweep) ': Membrane Potential']);
-            grid on;
-            hold off;
-        end
+        % if sweep==1 || sweep==numSweeps
+        %     figure;
+        %     plot(time_ms, data, 'b', 'LineWidth', 1.5); % Plot trace in blue
+        %     hold on;
+        %     plot(time_ms(spikeLocations), pks, 'ro', 'MarkerFaceColor', 'r'); % Red dots for detected APs
+        %     xlabel('Time (ms)');
+        %     ylabel('Membrane Potential (mV)');
+        %     title(['Sweep ' num2str(sweep) ': Membrane Potential']);
+        %     grid on;
+        %     hold off;
+        % end
+        %
                 % Compute dV/dt
         dvdt = diff(data) / si_actual; % mV per second
-        % v_trimmed = data(1:end-1);     % Align lengths with diff output
-        % 
+        v_trimmed = data(1:end-1);     % Align lengths with diff output
+
         % if sweep == 1 || sweep == numSweeps
         %     % Plot phase plot
         %     figure;
-        %     plot(v_trimmed, dvdt, 'k');
+        %     plot(v_trimmed, dvdt, 'k'); %TODO; find out how to plot only the first
         %     xlabel('Membrane Potential (mV)');
         %     ylabel('dV/dt (mV/s)');
         %     title(['Sweep ' num2str(sweep) ': Phase Plot']);
         %     grid on;
-        
+
         max_dvdt = max(abs(dvdt)); % Get max rate of rise/fall for the sweep
         maxDvdtPerSweep(sweep) = max_dvdt; % Store per sweep
-
+        
+        
     end
 
-    % Trim current array to match actual number of sweeps
-    C_used = C(1:numSweeps);
-    
-    % Plot dV/dt vs Current
-    figure;
-    plot(C_used * 1e12, maxDvdtPerSweep, 'ko-'); % Convert A to pA
-    xlabel('Input Current (pA)');
-    ylabel('Max dV/dt (mV/s)');
-    title('Max dV/dt vs Input Current');
-    grid on;
 
-end
+% 
+ end
