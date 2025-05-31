@@ -7,16 +7,15 @@
 % and shows average AP count per sweep in the final row
 
 % Created by Sayaka (Saya) Minegishi, with advice from ChatGPT.
-% Combined version with internal function
 % minegishis@brandeis.edu
-% 3/4/2025, merged 5/29/2025
+% Last modified 5/31/2025
 
 
 clear all;
 close all;
 %only for files with 25 sweeps
 %%%%%%%%%%% USER INPUT!!!!!!! %%%%%%%%%%%%%%%%%%%%
-outputfile = "SHRNOnly_grouped1.xlsx"; % Summary file name
+outputfile = "SHRNOnly_grouped1.xlsx"; % Summary file name for the table with the AP counts for each cell
 outputFilename_SEM = 'MeanAP_with_SEM_byCurrent.xlsx'; %excel file name for the table with injected current, mean AP, and their error bars
 %%%%%%%%%%%%%%% DO NOT MODIFY BELOW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp("Start of program")
@@ -74,10 +73,10 @@ for n = 1:numFiles
     end
 end
 
-% Aggregate and average by group (max 28 sweeps)
+% Aggregate and average by group (max 25 sweeps)
 groupNames = keys(fileGroups);
 numGroups = length(groupNames);
-maxTotalSweeps = min(28, max(cell2mat(values(groupSweepCounts))));
+maxTotalSweeps = min(25, max(cell2mat(values(groupSweepCounts))));
 
 allResults = cell(numGroups + 1, maxTotalSweeps + 1); % +1 for name column
 sweepDataGrouped = NaN(numGroups, maxTotalSweeps);
