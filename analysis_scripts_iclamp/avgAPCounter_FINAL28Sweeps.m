@@ -13,7 +13,7 @@
 
 clear all;
 close all;
-%only for files with 25 sweeps
+%only for files with 28 sweeps
 %%%%%%%%%%% USER INPUT!!!!!!! %%%%%%%%%%%%%%%%%%%%
 outputfile = "WKYNDG_acuteCNO.xlsx"; % Summary file name for the table with the AP counts for each cell
 outputFilename_SEM = 'WKYNDG_acuteCNO_SEM.xlsx'; %excel file name for the table with injected current, mean AP, and their error bars
@@ -29,8 +29,8 @@ disp(['Now working on directory ' dirname]);
 tempDir = fullfile(dirname, 'tempdata', filesep);
 get_files_from_user(dirname);
 
-currentInjections = [-50, -35, -20, -5, 10, 25, 40, 55, 70, 85, 100, 115, ...
-                     130, 145, 160, 175, 190, 205, 220, 235, 250, 265, 280, 295, 310];%injected current for each sweep
+currentInjections = [-20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, ...
+                     100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250];%injected current for each sweep
 
 list = dir(fullfile(tempDir, '*.abf'));
 file_names = {list.name};
@@ -51,7 +51,7 @@ for n = 1:numFiles
         apCounts = apCounts(1:min(end, 28));
 
         % Zero out sweeps 1 to 4 if any are non-zero
-        apCounts(1:min(4, numel(apCounts))) = 0;
+        apCounts(1:min(2, numel(apCounts))) = 0;
 
         sweepCount = numel(apCounts);
 
@@ -73,10 +73,10 @@ for n = 1:numFiles
     end
 end
 
-% Aggregate and average by group (max 25 sweeps)
+% Aggregate and average by group (max 28 sweeps)
 groupNames = keys(fileGroups);
 numGroups = length(groupNames);
-maxTotalSweeps = min(25, max(cell2mat(values(groupSweepCounts))));
+maxTotalSweeps = min(28, max(cell2mat(values(groupSweepCounts))));
 
 allResults = cell(numGroups + 1, maxTotalSweeps + 1); % +1 for name column
 sweepDataGrouped = NaN(numGroups, maxTotalSweeps);
@@ -100,7 +100,7 @@ for i = 1:numGroups
     % Remove outliers (per sweep)
     for s = 1:maxTotalSweeps
         sweepVals = groupMatrix(:, s);
-        Q1 = prctile(sweepVals, 25);
+        Q1 = prctile(sweepVals, 28);
         Q3 = prctile(sweepVals, 75);
         IQR = Q3 - Q1;
         lowerBound = Q1 - 1.5 * IQR;
@@ -135,8 +135,8 @@ writetable(T, filenameExcelDoc, 'Sheet', 1);
 %% Visualization: Boxplots after outlier removal only in a neat grid layout
 
 numSweeps = maxTotalSweeps;    % total sweeps
-sweepsPerFig = 5;             % number of sweeps to plot per figure
-cols = 5;                     % plots per row
+sweepsPerFig = 7;             % number of sweeps to plot per figure
+cols = 7;                     % plots per row
 rows = ceil(sweepsPerFig / cols);
 
 numFigs = ceil(numSweeps / sweepsPerFig);
@@ -185,7 +185,7 @@ semAP = std(sweepDataGrouped, 0, 1, 'omitnan') ./ sqrt(sum(~isnan(sweepDataGroup
 % Create a table using injected current values
 currentValues = currentInjections(:);  % ensure it's a column vector
 
-T_bounds = table(currentValues, meanAP', meanAP' - semAP', meanAP' + semAP', ...
+T_bounds = table(currentValues(1:maxTotalSweeps), meanAP', meanAP' - semAP', meanAP' + semAP', ...
     'VariableNames', {'CurrentInjection_pA', 'MeanAP', 'LowerBound', 'UpperBound'});
 
 disp(T_bounds);
@@ -221,7 +221,7 @@ rmdir(tempDir, 's');
 %% Internal Functions
 function [apCounts] = getAPCountForTrial9(filename1)
     [dataallsweeps, si, h] = abf2load(filename1); 
-    numSweeps = min(size(dataallsweeps, 3), 25); 
+    numSweeps = min(size(dataallsweeps, 3), 28); 
     apCounts = zeros(1, numSweeps);
     
     starttime_ms = 138;
