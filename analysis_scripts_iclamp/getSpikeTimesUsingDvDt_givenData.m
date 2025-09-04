@@ -1,6 +1,8 @@
 function apCounts = getSpikeTimesUsingDvDt_givenData(dataallsweeps, timepoints)
 % GETSPIKETIMESUSINGDVDT_GIVENDATA Detects and counts action potentials in each sweep
-% using phase-plane analysis.
+% using phase-plane analysis. This is the modification of
+% getAPCountUsingDvDt_peakspike.m, that accepts data and timepoints intead
+% of the filename.
 %
 % Inputs:
 %   dataallsweeps : voltage data [samples x channels x sweeps]
