@@ -13,11 +13,11 @@ function [apCount, spikeTimes] = getSpikeTimesSingleSweep(data, timepoints)
 
 % Hardcoded parameters
 threshold = 0;    % voltage threshold for spike detection (mV)
-minISI_ms = 3;    % minimum interspike interval (ms)
-
+minISI_s = 0.003;    % minimum interspike interval (s)
+dvdt_thresh=0.5e5;
 % Compute sampling interval from timepoints
-si_actual = mean(diff(timepoints)) * 1e-3; % convert ms to seconds
-minISI_samples = round(minISI_ms / mean(diff(timepoints))); % convert ms to samples
+si_actual = mean(diff(timepoints)); % in seconds
+minISI_samples = round(minISI_s / mean(diff(timepoints))); % convert s to samples
 
 % Compute dV/dt
 dvdt = diff(data) / si_actual;
@@ -35,9 +35,14 @@ end
 % --- Find first dv/dt = 0 after threshold (AP peak) ---
 peak_indices = [];
 for i = 1:length(spike_indices)
+    found_dvdt_thresh=false;
     idx_start = spike_indices(i);
+
     for j = idx_start:length(dvdt)-1
-        if dvdt(j) > 0 && dvdt(j+1) <= 0
+        if dvdt(j)>dvdt_thresh
+            found_dvdt_thresh = true;
+        end
+        if found_dvdt_thresh && dvdt(j) > 0 && dvdt(j+1) <= 0
             peak_indices(end+1,1) = j; % store peak index
             break
         end

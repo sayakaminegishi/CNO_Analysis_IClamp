@@ -1,20 +1,8 @@
-
-% S = ndi.session('/Users/sayakaminegishi/MATLAB/Projects/CNO_Analysis_IClamp2025/saya');
-% 
-% subjectTable = ndi.fun.docTable.subject(S);
-
-%% === Setup session ===
-% Change this to your data folder
-steve = false;
-
-if steve
-    session_folder = '/Users/vanhoosr/data/saya';
-else
-    session_folder = '/Users/sayakaminegishi/MATLAB/Projects/CNO_Analysis_IClamp2025/saya';
-end
+session_folder = '/Users/sayakaminegishi/MATLAB/Projects/CNO_Analysis_IClamp2025/saya';
 
 % Open or create NDI session
 S = ndi.session.dir(session_folder);
+sT = ndi.fun.docTable.subject(S)
 
 
 %% === Get the probes that are patch recordings ===
@@ -30,7 +18,7 @@ for P=1:N; %numel(p)
     f = figure;
     counter = 0;
 
-    for e=1:1 %numel(et)
+    for e=1:numel(et)
         counter = counter+1;
         supersubplot(f,4,4,counter);
         [d,t] = p{P}.readtimeseries(e,-inf,inf);

@@ -30,7 +30,7 @@ for P=1:N; %numel(p)
     f = figure;
     counter = 0;
 
-    for e=1:1 %numel(et)
+    for e=1:numel(et)
         counter = counter+1;
         supersubplot(f,4,4,counter);
         [d,t] = p{P}.readtimeseries(e,-inf,inf);
