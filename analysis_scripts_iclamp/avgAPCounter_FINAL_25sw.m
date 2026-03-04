@@ -23,9 +23,9 @@ close all;
 currentInjections = [-50, -35, -20, -5, 10, 25, 40, 55, 70, 85, 100, 115, ...
                      130, 145, 160, 175, 190, 205, 220, 235, 250, 265, 280, 295, 310];%injected current for each sweep
 
-outputfile = "WKYNG_ONLY.xlsx"; % Summary file name for the table with the AP counts for each cell
-ungroupedTableName='WKYNG_ONLY_UNGROUPED.xlsx'; %name of summary excel table with AP counts that includes all the trials from each cell(i.e. not averaged)
-outputFilename_SEM = 'WKYNG_ONLY_SEM.xlsx'; %excel file name for the table with injected current, mean AP, and their error bars
+outputfile = "SHRNG_48hCNO.xlsx"; % Summary file name for the table with the AP counts for each cell
+ungroupedTableName='SHRNG_48hCNO_UNGROUPED.xlsx'; %name of summary excel table with AP counts that includes all the trials from each cell(i.e. not averaged)
+outputFilename_SEM = 'SHRNG_48hCNO_SEM.xlsx'; %excel file name for the table with injected current, mean AP, and their error bars
 %%%%%%%%%%%%%%% DO NOT MODIFY BELOW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp("Start of program")
 

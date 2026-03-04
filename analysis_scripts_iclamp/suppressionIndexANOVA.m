@@ -4,7 +4,7 @@ function [p, tbl, stats, c, m, gnames] = suppressionIndexANOVA(biggestTable)
 % [P, TBL, STATS, C, M, GNAMES] = tableANOVA2(BIGGESTTABLE)
 %
 % Filters rows (virus/drug empty; celltype matches), runs one-way ANOVA
-% on FIcalc.fitless.peakResponse grouped by StrainName, displays:
+% on FIcalc.fitless.suppressionIndex grouped by StrainName, displays:
 %   (1) ANOVA plot with axis labels
 %   (2) multcompare plot with axis labels
 % Prints:

@@ -39,7 +39,7 @@ end
 keep_virus = is_whitespace_col(biggestTable, col_virus);
 keep_drug  = is_whitespace_col(biggestTable, col_drug);
 
-target_celltype_str = 'CL:0011103, CL:0000516';
+target_celltype_str = 'CL:0011103, CL:0000516'; %neurons and glia
 celltype_data = biggestTable.(col_celltype);
 
 if iscell(celltype_data) || isstring(celltype_data)

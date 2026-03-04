@@ -1,7 +1,5 @@
-close all
+[P, TBL, STATS] = tableANOVA_strainEffect_AllFitless_Ranked(bT);
 
-%[p, tbl, stats] = tableANOVA2(bT);
-[P, TBL, STATS]= tableANOVA_WKY_CNO_AllFitless(bT);
 
 fields = fieldnames(P);
 fprintf('\n%-35s | %-10s\n', 'Metric', 'P-Value');
@@ -10,6 +8,3 @@ for i = 1:numel(fields)
     metric = fields{i};
     fprintf('%-35s | %.4f\n', metric, P.(metric));
 end
-
-%multiple comparison of means:
-%multcompare(STATS.interpolated_c50)
