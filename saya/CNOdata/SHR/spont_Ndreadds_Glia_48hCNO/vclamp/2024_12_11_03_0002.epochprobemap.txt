@@ -1,3 +1,0 @@
-name	reference	type	devicestring	subjectstring
-bath_2024_12_11_3	1	stimulator	sjbirren_abf:ai1	2024_12_11_3@sjbirrenlab.brandeis.edu
-Vm_2024_12_11_3	1	patch-Vm	sjbirren_abf:ai1	2024_12_11_3@sjbirrenlab.brandeis.edu
